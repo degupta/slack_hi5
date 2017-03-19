@@ -152,6 +152,37 @@ HarishSrinivasan: 0.8254164168952589
 ScottMcMullan: 0.8195907622735835
 ```
 
+## Capped to 5 high fives per pair
+
+```
+val upto_5 = data.map(r => (r(0) + ":" + r(1), Seq(r))).reduceByKey(_ ++ _).flatMap(a => a._2.take(10))
+
+val vertices = users.map(u => (userHash(u), u)).cache
+val edges = upto_5.map(line => Edge(userHash(line(0)), userHash(line(1)), 1.0))
+val graph = Graph(vertices, edges, "")
+
+val prGraph = graph.staticPageRank(5).cache
+val nameAndPrGraph = graph.outerJoinVertices(prGraph.vertices) {
+  (v, name, rank) => (rank.getOrElse(0.0), name)
+}
+nameAndPrGraph.vertices.top(10) {
+  Ordering.by((entry: (VertexId, (Double, String))) => entry._2._1)
+}.foreach(t => println(t._2._2 + " => " + f"${t._2._1}%.2f"))
+```
+
+```
+DevanshGupta => 1.106610827952025
+BethMatteucci => 1.07778954491504
+MarkNg => 1.073003297557017
+DerrickSchmidt => 1.0642523739879457
+WillRoman => 1.0195184065748977
+HarishSrinivasan => 0.8895739990088168
+Yan-DavidErlich => 0.8830998734906618
+RoryShevin => 0.881691819269251
+TianGeng => 0.8650695080047386
+GilZhaiek => 0.8614133454017096
+```
+
 
 
 
