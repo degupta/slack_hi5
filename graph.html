@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+</style>
+<svg width="960" height="600"></svg>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+var simulation = d3.forceSimulation()
+    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+var graph = {"nodes":[{"id":"DerrickSchmidt","group":1},{"id":"MarkNg","group":1},{"id":"TianGeng","group":1},{"id":"GlennXian","group":1},{"id":"AbhishekBelani","group":1},{"id":"WillRoman","group":1},{"id":"AmyFong","group":1},{"id":"ScottMcMullan","group":1},{"id":"Yan-DavidErlich","group":1},{"id":"HarishSrinivasan","group":1},{"id":"ZachKozac","group":1},{"id":"PooyaJaferian","group":1},{"id":"AaronGloege","group":1},{"id":"YarukAsghar","group":1},{"id":"RyanJunee","group":1},{"id":"AlbertChau","group":1},{"id":"ShirleyHo","group":1},{"id":"EsteraKorpos","group":1},{"id":"MatheusFelipe","group":1},{"id":"NickRussell","group":1},{"id":"XichiZheng","group":1},{"id":"GurekamdeepSidhu","group":1},{"id":"KathrynRitchie","group":1},{"id":"ArielSalomon","group":1},{"id":"DemitriTzitzon","group":1},{"id":"EricChen","group":1},{"id":"EBNovak","group":1},{"id":"PaulBrink","group":1},{"id":"LawrenceWhittle","group":1},{"id":"BrandonKief","group":1},{"id":"GilZhaiek","group":1},{"id":"VitaSolomina","group":1},{"id":"MattSmall","group":1},{"id":"DevanshGupta","group":1},{"id":"TomHirschfeld","group":1},{"id":"BethMatteucci","group":1},{"id":"SamVilain","group":1},{"id":"VighneshRege","group":1},{"id":"AdamCohen","group":1},{"id":"KiyomiOtani","group":1},{"id":"AlexandraStanford","group":1},{"id":"RoryShevin","group":1},{"id":"AlexStanford","group":1},{"id":"EricUresti","group":1},{"id":"JoshSanto","group":1},{"id":"ChrisAirola","group":1},{"id":"TommyHa","group":1}],"links":[{"source":"DerrickSchmidt","target":"MarkNg","value":10},{"source":"MarkNg","target":"TianGeng","value":9},{"source":"DerrickSchmidt","target":"TianGeng","value":8},{"source":"GlennXian","target":"MarkNg","value":6},{"source":"AbhishekBelani","target":"WillRoman","value":6},{"source":"AmyFong","target":"MarkNg","value":5},{"source":"ScottMcMullan","target":"Yan-DavidErlich","value":4},{"source":"HarishSrinivasan","target":"WillRoman","value":4},{"source":"DerrickSchmidt","target":"GlennXian","value":4},{"source":"GlennXian","target":"TianGeng","value":4},{"source":"ScottMcMullan","target":"ZachKozac","value":4},{"source":"HarishSrinivasan","target":"Yan-DavidErlich","value":4},{"source":"PooyaJaferian","target":"ZachKozac","value":4},{"source":"ScottMcMullan","target":"WillRoman","value":4},{"source":"AbhishekBelani","target":"HarishSrinivasan","value":4},{"source":"AaronGloege","target":"GlennXian","value":4},{"source":"MarkNg","target":"YarukAsghar","value":3},{"source":"AbhishekBelani","target":"RyanJunee","value":3},{"source":"AlbertChau","target":"MarkNg","value":3},{"source":"ScottMcMullan","target":"ShirleyHo","value":3},{"source":"EsteraKorpos","target":"MarkNg","value":3},{"source":"ShirleyHo","target":"ZachKozac","value":3},{"source":"AmyFong","target":"DerrickSchmidt","value":3},{"source":"MarkNg","target":"MatheusFelipe","value":3},{"source":"NickRussell","target":"ZachKozac","value":3},{"source":"ScottMcMullan","target":"XichiZheng","value":3},{"source":"GurekamdeepSidhu","target":"YarukAsghar","value":3},{"source":"AbhishekBelani","target":"KathrynRitchie","value":3},{"source":"ArielSalomon","target":"WillRoman","value":3},{"source":"AmyFong","target":"TianGeng","value":3},{"source":"DemitriTzitzon","target":"EricChen","value":3},{"source":"WillRoman","target":"Yan-DavidErlich","value":3},{"source":"GurekamdeepSidhu","target":"TianGeng","value":3},{"source":"EsteraKorpos","target":"TianGeng","value":3},{"source":"AlbertChau","target":"PooyaJaferian","value":3},{"source":"DerrickSchmidt","target":"GurekamdeepSidhu","value":3},{"source":"GurekamdeepSidhu","target":"MarkNg","value":3},{"source":"EBNovak","target":"PaulBrink","value":3},{"source":"MarkNg","target":"ScottMcMullan","value":3},{"source":"AlbertChau","target":"MatheusFelipe","value":3},{"source":"LawrenceWhittle","target":"WillRoman","value":3},{"source":"MarkNg","target":"ShirleyHo","value":3},{"source":"MarkNg","target":"Yan-DavidErlich","value":3},{"source":"BrandonKief","target":"ScottMcMullan","value":3},{"source":"MatheusFelipe","target":"PooyaJaferian","value":3},{"source":"KathrynRitchie","target":"WillRoman","value":3},{"source":"TianGeng","target":"YarukAsghar","value":3},{"source":"AbhishekBelani","target":"ScottMcMullan","value":3},{"source":"GilZhaiek","target":"ScottMcMullan","value":2},{"source":"HarishSrinivasan","target":"ScottMcMullan","value":2},{"source":"DerrickSchmidt","target":"VitaSolomina","value":2},{"source":"BrandonKief","target":"XichiZheng","value":2},{"source":"NickRussell","target":"ScottMcMullan","value":2},{"source":"AlbertChau","target":"GlennXian","value":2},{"source":"AbhishekBelani","target":"MattSmall","value":2},{"source":"DerrickSchmidt","target":"XichiZheng","value":2},{"source":"DevanshGupta","target":"EBNovak","value":2},{"source":"DerrickSchmidt","target":"GilZhaiek","value":2},{"source":"TomHirschfeld","target":"Yan-DavidErlich","value":2},{"source":"RyanJunee","target":"WillRoman","value":2},{"source":"AbhishekBelani","target":"EBNovak","value":2},{"source":"BethMatteucci","target":"ZachKozac","value":2},{"source":"HarishSrinivasan","target":"KathrynRitchie","value":2},{"source":"DerrickSchmidt","target":"ZachKozac","value":2},{"source":"GilZhaiek","target":"GurekamdeepSidhu","value":2},{"source":"TianGeng","target":"VitaSolomina","value":2},{"source":"DerrickSchmidt","target":"YarukAsghar","value":2},{"source":"SamVilain","target":"Yan-DavidErlich","value":2},{"source":"ArielSalomon","target":"EricChen","value":2},{"source":"DerrickSchmidt","target":"ScottMcMullan","value":2},{"source":"MatheusFelipe","target":"VighneshRege","value":2},{"source":"DemitriTzitzon","target":"DerrickSchmidt","value":2},{"source":"RyanJunee","target":"ScottMcMullan","value":2},{"source":"VighneshRege","target":"Yan-DavidErlich","value":2},{"source":"AdamCohen","target":"KiyomiOtani","value":2},{"source":"GilZhaiek","target":"MarkNg","value":2},{"source":"ScottMcMullan","target":"TianGeng","value":2},{"source":"DemitriTzitzon","target":"ScottMcMullan","value":2},{"source":"ArielSalomon","target":"DemitriTzitzon","value":2},{"source":"AlbertChau","target":"VighneshRege","value":2},{"source":"AbhishekBelani","target":"Yan-DavidErlich","value":2},{"source":"AbhishekBelani","target":"AlexandraStanford","value":2},{"source":"DemitriTzitzon","target":"ZachKozac","value":2},{"source":"EsteraKorpos","target":"PooyaJaferian","value":2},{"source":"ArielSalomon","target":"NickRussell","value":2},{"source":"DerrickSchmidt","target":"PooyaJaferian","value":2},{"source":"MatheusFelipe","target":"XichiZheng","value":2},{"source":"DemitriTzitzon","target":"MatheusFelipe","value":2},{"source":"DemitriTzitzon","target":"PooyaJaferian","value":2},{"source":"PooyaJaferian","target":"ScottMcMullan","value":2},{"source":"BrandonKief","target":"ZachKozac","value":2},{"source":"EricChen","target":"MatheusFelipe","value":2},{"source":"BethMatteucci","target":"RoryShevin","value":2},{"source":"ScottMcMullan","target":"VitaSolomina","value":2},{"source":"BethMatteucci","target":"Yan-DavidErlich","value":2},{"source":"ArielSalomon","target":"RoryShevin","value":2},{"source":"BrandonKief","target":"TianGeng","value":2},{"source":"WillRoman","target":"ZachKozac","value":2},{"source":"ArielSalomon","target":"SamVilain","value":2},{"source":"KathrynRitchie","target":"KiyomiOtani","value":2},{"source":"XichiZheng","target":"Yan-DavidErlich","value":2},{"source":"AbhishekBelani","target":"ZachKozac","value":2},{"source":"EBNovak","target":"HarishSrinivasan","value":2},{"source":"RoryShevin","target":"WillRoman","value":2},{"source":"BrandonKief","target":"DerrickSchmidt","value":2},{"source":"AbhishekBelani","target":"AlexStanford","value":2},{"source":"DevanshGupta","target":"WillRoman","value":2},{"source":"RyanJunee","target":"Yan-DavidErlich","value":2},{"source":"EBNovak","target":"WillRoman","value":2},{"source":"ArielSalomon","target":"TianGeng","value":2},{"source":"MarkNg","target":"WillRoman","value":2},{"source":"EBNovak","target":"MattSmall","value":2},{"source":"AmyFong","target":"HarishSrinivasan","value":2},{"source":"DevanshGupta","target":"XichiZheng","value":2},{"source":"EricUresti","target":"LawrenceWhittle","value":2},{"source":"DerrickSchmidt","target":"DevanshGupta","value":2},{"source":"EricChen","target":"RoryShevin","value":2},{"source":"BrandonKief","target":"DevanshGupta","value":2},{"source":"BethMatteucci","target":"MarkNg","value":2},{"source":"MarkNg","target":"XichiZheng","value":2},{"source":"EsteraKorpos","target":"MatheusFelipe","value":2},{"source":"AmyFong","target":"ScottMcMullan","value":2},{"source":"DevanshGupta","target":"TianGeng","value":2},{"source":"AdamCohen","target":"KathrynRitchie","value":2},{"source":"MarkNg","target":"VighneshRege","value":2},{"source":"JoshSanto","target":"WillRoman","value":2},{"source":"VitaSolomina","target":"XichiZheng","value":2},{"source":"AlexandraStanford","target":"LawrenceWhittle","value":2},{"source":"AdamCohen","target":"JoshSanto","value":2},{"source":"BethMatteucci","target":"ScottMcMullan","value":2},{"source":"NickRussell","target":"ShirleyHo","value":2},{"source":"AlbertChau","target":"TianGeng","value":2},{"source":"DemitriTzitzon","target":"RoryShevin","value":2},{"source":"ShirleyHo","target":"XichiZheng","value":2},{"source":"ChrisAirola","target":"ScottMcMullan","value":2},{"source":"SamVilain","target":"ScottMcMullan","value":2},{"source":"AaronGloege","target":"AlbertChau","value":2},{"source":"EricChen","target":"HarishSrinivasan","value":2},{"source":"ChrisAirola","target":"ZachKozac","value":2},{"source":"MatheusFelipe","target":"RoryShevin","value":2},{"source":"EsteraKorpos","target":"ShirleyHo","value":2},{"source":"MarkNg","target":"VitaSolomina","value":2},{"source":"BrandonKief","target":"VitaSolomina","value":2},{"source":"MarkNg","target":"PooyaJaferian","value":2},{"source":"MattSmall","target":"WillRoman","value":2},{"source":"TianGeng","target":"TommyHa","value":2},{"source":"DerrickSchmidt","target":"EsteraKorpos","value":2}]};
+
+// d3.json(hi5Json, function(error, graph) {
+  // if (error) throw error;
+(function() {
+  var link = svg.append("g")
+      .attr("class", "links")
+    .selectAll("line")
+    .data(graph.links)
+    .enter().append("line")
+      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.append("g")
+      .attr("class", "nodes")
+    .selectAll("circle")
+    .data(graph.nodes)
+    .enter().append("circle")
+      .attr("r", 5)
+      .attr("fill", function(d) { return color(d.group); })
+      .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+  node.append("title")
+      .text(function(d) { return d.id; });
+
+  simulation
+      .nodes(graph.nodes)
+      .on("tick", ticked);
+
+  simulation.force("link")
+      .links(graph.links);
+
+  function ticked() {
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  }
+})();
+
+function dragstarted(d) {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+
+function dragged(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
+
+function dragended(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d.fx = null;
+  d.fy = null;
+}
+
+</script>
